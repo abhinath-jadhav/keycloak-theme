@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Command *)",
+      "WebFetch(domain:docs.keycloakify.dev)"
+    ]
+  }
+}
