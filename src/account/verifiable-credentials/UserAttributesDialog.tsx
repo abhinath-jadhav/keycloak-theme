@@ -1,0 +1,65 @@
+/**
+ * This file has been claimed for ownership from @keycloakify/keycloak-account-ui version 260700.0.3.
+ * To relinquish ownership and restore this file to its original content, run the following command:
+ * 
+ * $ npx keycloakify own --path "account/verifiable-credentials/UserAttributesDialog.tsx" --revert
+ */
+
+/* eslint-disable */
+
+// @ts-nocheck
+
+import { useTranslation } from "react-i18next";
+import { Modal, ModalVariant } from "../../shared/@patternfly/react-core";
+import {
+  Table,
+  TableVariant,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "../../shared/@patternfly/react-table";
+
+type UserAttributesDialogProps = {
+  credentialScopeName: string;
+  userAttributes: Record<string, string[]>;
+  onClose: () => void;
+};
+
+export const UserAttributesDialog = ({
+  credentialScopeName,
+  userAttributes,
+  onClose,
+}: UserAttributesDialogProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Modal
+      variant={ModalVariant.medium}
+      title={t("credentialUserAttributesFor", { credentialScopeName })}
+      isOpen
+      onClose={onClose}
+    >
+      <Table
+        aria-label={t("credentialUserAttributes")}
+        variant={TableVariant.compact}
+      >
+        <Thead>
+          <Tr>
+            <Th>{t("credentialAttributeName")}</Th>
+            <Th>{t("credentialAttributeValue")}</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {Object.entries(userAttributes).map(([key, values]) => (
+            <Tr key={key}>
+              <Td>{key}</Td>
+              <Td>{values.join(", ")}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </Modal>
+  );
+};

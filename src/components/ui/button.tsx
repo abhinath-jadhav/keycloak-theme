@@ -49,6 +49,7 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
@@ -63,7 +64,11 @@ function Button({
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {/* Cast needed because react-i18next (pulled in by the account/admin themes)
+          globally widens DOMAttributes["children"], which Radix's Slot rejects. */}
+      {children as React.ReactNode}
+    </Comp>
   )
 }
 

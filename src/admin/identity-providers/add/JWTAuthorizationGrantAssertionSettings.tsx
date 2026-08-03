@@ -1,0 +1,86 @@
+/**
+ * This file has been claimed for ownership from @keycloakify/keycloak-admin-ui version 260700.0.2.
+ * To relinquish ownership and restore this file to its original content, run the following command:
+ * 
+ * $ npx keycloakify own --path "admin/identity-providers/add/JWTAuthorizationGrantAssertionSettings.tsx" --revert
+ */
+
+/* eslint-disable */
+
+// @ts-nocheck
+
+import { useTranslation } from "react-i18next";
+import { DefaultSwitchControl } from "../../components/SwitchControl";
+import { FormGroup } from "../../../shared/@patternfly/react-core";
+import { useFormContext, Controller } from "react-hook-form";
+import { TimeSelector } from "../../components/time-selector/TimeSelector";
+import { SelectControl, HelpItem } from "../../../shared/keycloak-ui-shared";
+import { useServerInfo } from "../../context/server-info/ServerInfoProvider";
+
+export const JWTAuthorizationGrantAssertionSettings = () => {
+  const { t } = useTranslation();
+  const { cryptoInfo } = useServerInfo();
+  const { control } = useFormContext();
+
+  const asymmetricAlgorithms =
+    cryptoInfo?.clientSignatureAsymmetricAlgorithms ?? [];
+
+  return (
+    <>
+      <DefaultSwitchControl
+        name="config.jwtAuthorizationGrantAssertionReuseAllowed"
+        label={t("jwtAuthorizationGrantAssertionReuseAllowed")}
+        labelIcon={t("jwtAuthorizationGrantAssertionReuseAllowedHelp")}
+        stringify
+      />
+
+      <FormGroup
+        label={t("jwtAuthorizationGrantMaxAllowedAssertionExpiration")}
+        fieldId="jwtAuthorizationGrantMaxAllowedAssertionExpiration"
+        labelIcon={
+          <HelpItem
+            helpText={t(
+              "jwtAuthorizationGrantMaxAllowedAssertionExpirationHelp",
+            )}
+            fieldLabelId="jwtAuthorizationGrantMaxAllowedAssertionExpiration"
+          />
+        }
+      >
+        <Controller
+          name="config.jwtAuthorizationGrantMaxAllowedAssertionExpiration"
+          defaultValue={300}
+          control={control}
+          render={({ field }) => (
+            <TimeSelector
+              data-testid="jwtAuthorizationGrantMaxAllowedAssertionExpiration"
+              value={field.value!}
+              onChange={field.onChange}
+              units={["second", "minute", "hour"]}
+            />
+          )}
+        />
+      </FormGroup>
+      <SelectControl
+        name="config.jwtAuthorizationGrantAssertionSignatureAlg"
+        label={t("jwtAuthorizationGrantAssertionSignatureAlg")}
+        labelIcon={t("jwtAuthorizationGrantAssertionSignatureAlgHelp")}
+        options={[
+          { key: "", value: t("algorithmNotSpecified") },
+          ...asymmetricAlgorithms.sort().map((alg) => ({
+            key: alg,
+            value: alg,
+          })),
+        ]}
+        controller={{
+          defaultValue: "",
+        }}
+      />
+      <DefaultSwitchControl
+        name="config.jwtAuthorizationGrantLimitAccessTokenExp"
+        label={t("jwtAuthorizationGrantLimitAccessTokenExp")}
+        labelIcon={t("jwtAuthorizationGrantLimitAccessTokenExpHelp")}
+        stringify
+      />
+    </>
+  );
+};

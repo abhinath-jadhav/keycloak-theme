@@ -1,0 +1,94 @@
+/**
+ * This file has been claimed for ownership from @keycloakify/keycloak-admin-ui version 260700.0.2.
+ * To relinquish ownership and restore this file to its original content, run the following command:
+ *
+ * $ npx keycloakify own --path "admin/index.css" --revert
+ */
+
+@import "@fontsource-variable/geist";
+
+/*
+ * Brand theming for the Admin Console.
+ * PatternFly components read their colors/radii from these global custom
+ * properties, so overriding them here re-skins the console without having
+ * to touch any PatternFly component internals. Values are kept in sync with
+ * the brand tokens used by the login theme (see src/login/index.css).
+ */
+:root {
+  --brand-color: oklch(70.5% 0.213 47.604);
+  --brand-color-hover: oklch(60% 0.19 47.604);
+  --brand-color-light: oklch(88% 0.09 47.604);
+
+  --pf-v5-global--primary-color--100: var(--brand-color);
+  --pf-v5-global--primary-color--200: var(--brand-color-hover);
+  --pf-v5-global--primary-color--light-100: var(--brand-color-light);
+  --pf-v5-global--primary-color--dark-100: var(--brand-color);
+
+  --pf-v5-global--active-color--100: var(--brand-color);
+  --pf-v5-global--active-color--300: var(--brand-color);
+
+  --pf-v5-global--link--Color: var(--brand-color);
+  --pf-v5-global--link--Color--hover: var(--brand-color-hover);
+  --pf-v5-global--link--Color--light: var(--brand-color);
+  --pf-v5-global--link--Color--light--hover: var(--brand-color-hover);
+  --pf-v5-global--link--Color--dark: var(--brand-color);
+  --pf-v5-global--link--Color--dark--hover: var(--brand-color-hover);
+
+  --pf-v5-global--BorderRadius--sm: 0.375rem;
+
+  --pf-v5-global--FontFamily--text: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --pf-v5-global--FontFamily--heading: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:where(.pf-v5-theme-dark) {
+  --pf-v5-global--primary-color--100: var(--brand-color-light);
+  --pf-v5-global--active-color--100: var(--brand-color-light);
+  --pf-v5-global--link--Color: var(--brand-color-light);
+  --pf-v5-global--link--Color--hover: var(--brand-color);
+}
+
+.pf-v5-c-button,
+.pf-v5-c-form-control,
+.pf-v5-c-card,
+.pf-v5-c-menu,
+.pf-v5-c-dropdown__menu,
+.pf-v5-c-modal-box {
+  border-radius: var(--pf-v5-global--BorderRadius--sm);
+}
+
+img.keycloak__pageheader_brand {
+  height: 35px;
+}
+
+.keycloak__form {
+  max-width: 1024px;
+  padding-bottom: var(--pf-v5-global--spacer--4xl);
+}
+
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  vertical-align: baseline;
+}
+
+.keycloak__form_actions {
+  position: fixed;
+  bottom: 0px;
+  background-color: var(--pf-v5-c-page__main-section--m-light--BackgroundColor);
+  padding-top: var(--pf-v5-global--spacer--md);
+  padding-bottom: var(--pf-v5-global--spacer--sm);
+  padding-left: var(--pf-v5-global--spacer--md);
+  width: 100%;
+  border-top: 1px solid var(--pf-v5-global--BorderColor--100);
+  margin-left: calc(-1 * var(--pf-v5-global--spacer--lg));
+}
+
+.keycloak__section_intro__help {
+  padding: var(--pf-v5-global--spacer--md) 0 var(--pf-v5-global--spacer--lg);
+  color: var(--pf-v5-global--primary-color--100);
+  width: fit-content;
+}
+
+div.w-tc-editor {
+  font-family: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace';
+}
