@@ -6,6 +6,9 @@
   "scripts": {
     "postinstall": "keycloakify sync-extensions",
     "dev": "vite",
+    "dev:login": "vite",
+    "dev:admin": "VITE_THEME_TYPE=admin vite",
+    "dev:account": "VITE_THEME_TYPE=account vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

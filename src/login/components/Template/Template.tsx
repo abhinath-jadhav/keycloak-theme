@@ -53,7 +53,7 @@ export function Template(props: TemplateProps) {
         document.title =
             documentTitle ??
             msgStr("loginTitle", kcContext.realm.displayName || kcContext.realm.name);
-    }, []);
+    }, [documentTitle, msgStr, kcContext.realm.displayName, kcContext.realm.name]);
 
     useSetClassName({
         qualifiedName: "html",

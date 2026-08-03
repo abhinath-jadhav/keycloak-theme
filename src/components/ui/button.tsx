@@ -5,6 +5,7 @@
  * $ npx keycloakify own --path "components/ui/button.tsx" --revert
  */
 
+/* eslint-disable react-refresh/only-export-components */
 import { cva, type VariantProps } from "class-variance-authority"
 import { Slot as SlotPrimitive } from "radix-ui"
 import * as React from "react"

@@ -14,7 +14,7 @@ type InputProps = React.ComponentProps<"input"> & {
 
 }
 
-function Input({ className, type, icon, ...props }: InputProps) {
+function Input({ className, type, ...props }: InputProps) {
     return (
         <input
             type={type}

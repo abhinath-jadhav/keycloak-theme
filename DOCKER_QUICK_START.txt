@@ -1,0 +1,140 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Keycloak Docker Theme Deployment - Quick Reference             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Theme Name: keycloak-theme-auctionbase
+JAR File: keycloak-theme-for-kc-all-other-versions.jar
+
+┌──────────────────────────────────────────────────────────────────┐
+│ OPTION 1: Automated Deployment (Easiest)                        │
+└──────────────────────────────────────────────────────────────────┘
+
+  ./deploy-to-docker.sh
+
+  This script will:
+  ✓ Find your container
+  ✓ Copy the JAR
+  ✓ Run the build command
+  ✓ Restart Keycloak
+  ✓ Show you next steps
+
+┌──────────────────────────────────────────────────────────────────┐
+│ OPTION 2: Manual Deployment (3 Commands)                        │
+└──────────────────────────────────────────────────────────────────┘
+
+  Replace 'keycloak' with your actual container name!
+
+  1. Copy JAR to container:
+     ┌────────────────────────────────────────────────────────────┐
+     │ docker cp dist_keycloak/keycloak-theme-*.jar \            │
+     │   keycloak:/opt/keycloak/providers/                       │
+     └────────────────────────────────────────────────────────────┘
+
+  2. Run build INSIDE container (CRITICAL!):
+     ┌────────────────────────────────────────────────────────────┐
+     │ docker exec keycloak /opt/keycloak/bin/kc.sh build        │
+     └────────────────────────────────────────────────────────────┘
+
+  3. Restart container:
+     ┌────────────────────────────────────────────────────────────┐
+     │ docker restart keycloak                                    │
+     └────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Finding Your Container Name                                      │
+└──────────────────────────────────────────────────────────────────┘
+
+  docker ps | grep keycloak
+
+  Common names:
+  • keycloak
+  • keycloak_1
+  • keycloak-1
+  • myproject_keycloak_1
+  • myproject-keycloak-1
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Verification Commands                                            │
+└──────────────────────────────────────────────────────────────────┘
+
+  Check JAR is in container:
+  docker exec keycloak ls -lh /opt/keycloak/providers/
+
+  Check Keycloak logs:
+  docker logs keycloak
+
+  Search for theme in logs:
+  docker logs keycloak 2>&1 | grep -i "keycloak-theme"
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Selecting Theme in Keycloak Admin                               │
+└──────────────────────────────────────────────────────────────────┘
+
+  1. Open: http://localhost:8080
+  
+  2. Login with admin credentials
+  
+  3. Select your realm (or master)
+  
+  4. Go to: Realm Settings → Themes tab
+  
+  5. Select 'keycloak-theme-auctionbase' from:
+     • Login Theme
+     • Account Theme
+     • Admin Console Theme
+  
+  6. Click Save
+  
+  7. Test:
+     • Logout to see login theme
+     • Visit /realms/{realm}/account for account theme
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Troubleshooting                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+  Theme not in dropdown?
+  → Run: docker exec keycloak /opt/keycloak/bin/kc.sh build
+  → Then: docker restart keycloak
+
+  Container name wrong?
+  → Run: docker ps -a
+
+  Permission errors?
+  → Run: chmod 644 dist_keycloak/*.jar
+
+  See errors?
+  → Run: docker logs keycloak
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Docker Compose Users                                             │
+└──────────────────────────────────────────────────────────────────┘
+
+  Add to docker-compose.yml:
+
+  services:
+    keycloak:
+      volumes:
+        - ./dist_keycloak:/opt/keycloak/providers
+
+  Then:
+  docker-compose down
+  docker-compose up -d
+
+┌──────────────────────────────────────────────────────────────────┐
+│ After Theme Updates                                              │
+└──────────────────────────────────────────────────────────────────┘
+
+  1. Rebuild theme:
+     npm run build-keycloak-theme
+
+  2. Redeploy:
+     ./deploy-to-docker.sh
+
+  Or manually:
+     docker cp dist_keycloak/*.jar keycloak:/opt/keycloak/providers/
+     docker restart keycloak
+
+╔══════════════════════════════════════════════════════════════════╗
+║  Need more help? Check: DOCKER_DEPLOYMENT.md                    ║
+╚══════════════════════════════════════════════════════════════════╝
