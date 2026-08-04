@@ -32,11 +32,11 @@ export function CenteredCardLayout({
                         <div className="size-12">
                             <img src={logo} alt="" />
                         </div>
-                        <span className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
+                        <span className="text-2xl font-bold text-gray-900 mt-2">
                             Auctionbase
                         </span>
                     </div>
-                    <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-lg text-gray-600 mb-4">
                         {props?.headerNode}
                     </p>
                 </div>
