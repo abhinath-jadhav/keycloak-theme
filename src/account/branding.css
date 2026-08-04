@@ -6,12 +6,19 @@
 @import "@fontsource-variable/geist";
 
 :root {
-  /* Modern color palette - Blue/Violet gradient theme */
-  --brand-color: oklch(60% 0.18 260);
-  --brand-color-hover: oklch(52% 0.16 260);
-  --brand-color-light: oklch(85% 0.08 260);
-  --brand-color-dark: oklch(45% 0.15 260);
-  
+  /* Modern color palette - Vivid indigo/violet, deliberately distinct from Keycloak's stock blue */
+  --brand-color: oklch(58% 0.22 292);
+  --brand-color-hover: oklch(50% 0.20 292);
+  --brand-color-light: oklch(90% 0.05 292);
+  --brand-color-dark: oklch(38% 0.18 292);
+
+  /* Dark chrome for masthead + sidebar (structural brand identity) */
+  --chrome-bg: oklch(16% 0.025 280);
+  --chrome-bg-hover: oklch(23% 0.035 280);
+  --chrome-border: oklch(27% 0.03 280);
+  --chrome-text: oklch(88% 0.01 280);
+  --chrome-text-muted: oklch(62% 0.02 280);
+
   /* Success, warning, danger colors */
   --success-color: oklch(65% 0.18 150);
   --warning-color: oklch(70% 0.15 80);
@@ -59,21 +66,32 @@
   --pf-v5-global--danger-color--100: var(--danger-color);
   --pf-v5-global--danger-color--200: oklch(50% 0.16 25);
 
-  /* Modern border radius */
-  --pf-v5-global--BorderRadius--sm: 0.5rem;
-  --pf-v5-global--BorderRadius--md: 0.75rem;
-  --pf-v5-global--BorderRadius--lg: 1rem;
+  /* Modern border radius - more pronounced rounding */
+  --pf-v5-global--BorderRadius--sm: 0.625rem;
+  --pf-v5-global--BorderRadius--md: 1rem;
+  --pf-v5-global--BorderRadius--lg: 1.25rem;
 
   /* Typography */
   --pf-v5-global--FontFamily--text: "Geist Variable", "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --pf-v5-global--FontFamily--heading: "Geist Variable", "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --pf-v5-global--FontFamily--monospace: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
-  /* Modern shadows */
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  /* Improved spacing */
+  --pf-v5-global--spacer--xs: 0.25rem;
+  --pf-v5-global--spacer--sm: 0.5rem;
+  --pf-v5-global--spacer--md: 1rem;
+  --pf-v5-global--spacer--lg: 1.5rem;
+  --pf-v5-global--spacer--xl: 2rem;
+  --pf-v5-global--spacer--2xl: 3rem;
+  --pf-v5-global--spacer--3xl: 4rem;
+  --pf-v5-global--spacer--4xl: 5rem;
+
+  /* Modern shadows - stronger depth so elevation reads clearly */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.08);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.16), 0 1px 2px -1px rgb(0 0 0 / 0.16);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.16), 0 2px 4px -2px rgb(0 0 0 / 0.16);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.18), 0 4px 6px -4px rgb(0 0 0 / 0.18);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
 
   /* Page background */
   --pf-v5-global--BackgroundColor--100: var(--neutral-50);
@@ -84,21 +102,22 @@
   --pf-v5-global--BorderColor--200: var(--neutral-300);
 }
 
-:where(.pf-v5-theme-dark) {
-  --brand-color-light: oklch(75% 0.12 260);
-  
-  --neutral-50: oklch(20% 0.02 260);
-  --neutral-100: oklch(24% 0.018 260);
-  --neutral-200: oklch(28% 0.016 260);
-  --neutral-300: oklch(34% 0.014 260);
-  --neutral-400: oklch(42% 0.012 260);
-  --neutral-500: oklch(52% 0.01 260);
-  --neutral-600: oklch(65% 0.008 260);
-  --neutral-700: oklch(75% 0.006 260);
-  --neutral-800: oklch(85% 0.004 260);
-  --neutral-900: oklch(92% 0.002 260);
+.pf-v5-theme-dark {
+  --brand-color-light: oklch(78% 0.10 292);
+
+  --neutral-50: oklch(20% 0.025 280);
+  --neutral-100: oklch(24% 0.022 280);
+  --neutral-200: oklch(28% 0.02 280);
+  --neutral-300: oklch(34% 0.018 280);
+  --neutral-400: oklch(42% 0.015 280);
+  --neutral-500: oklch(52% 0.012 280);
+  --neutral-600: oklch(65% 0.01 280);
+  --neutral-700: oklch(75% 0.008 280);
+  --neutral-800: oklch(85% 0.005 280);
+  --neutral-900: oklch(92% 0.002 280);
 
   --pf-v5-global--primary-color--100: var(--brand-color-light);
+  --pf-v5-global--primary-color--200: var(--brand-color);
   --pf-v5-global--active-color--100: var(--brand-color-light);
   --pf-v5-global--link--Color: var(--brand-color-light);
   --pf-v5-global--link--Color--hover: var(--brand-color);
@@ -166,6 +185,28 @@
   border-color: var(--pf-v5-global--BorderColor--200);
 }
 
+/* Enhanced table styles */
+.pf-v5-c-table thead {
+  background: linear-gradient(to bottom, var(--neutral-100), var(--neutral-50));
+  border-bottom: 2px solid var(--pf-v5-global--BorderColor--200);
+}
+
+.pf-v5-c-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--neutral-700);
+}
+
+.pf-v5-c-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.pf-v5-c-table tbody tr:hover {
+  background-color: var(--neutral-50);
+}
+
 /* Enhanced form controls */
 .pf-v5-c-form-control {
   border: 1.5px solid var(--pf-v5-global--BorderColor--100);
@@ -181,6 +222,37 @@
 
 .pf-v5-c-form-control:hover:not(:disabled) {
   border-color: var(--pf-v5-global--BorderColor--200);
+}
+
+/* Enhanced dropdown and select */
+.pf-v5-c-dropdown__menu,
+.pf-v5-c-menu {
+  border-radius: var(--pf-v5-global--BorderRadius--md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--pf-v5-global--BorderColor--100);
+}
+
+.pf-v5-c-dropdown__menu-item:hover,
+.pf-v5-c-menu__list-item:hover {
+  background-color: var(--brand-color-light);
+  color: var(--brand-color-dark);
+}
+
+/* Enhanced modal */
+.pf-v5-c-modal-box {
+  border-radius: var(--pf-v5-global--BorderRadius--lg);
+  box-shadow: var(--shadow-xl);
+  border: none;
+}
+
+.pf-v5-c-modal-box__header {
+  border-bottom: 2px solid var(--pf-v5-global--BorderColor--100);
+  padding-bottom: var(--pf-v5-global--spacer--md);
+}
+
+.pf-v5-c-modal-box__title {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 /* Enhanced alerts */
@@ -203,6 +275,189 @@
 .pf-v5-c-alert--m-danger {
   background-color: oklch(95% 0.04 25);
   border-left-color: var(--danger-color);
+}
+
+.pf-v5-c-alert--m-info {
+  background-color: oklch(95% 0.04 260);
+  border-left-color: var(--brand-color);
+}
+
+/* Dark chrome: masthead (top header) - real class is .pf-v5-c-masthead, not .pf-v5-c-page__header */
+.pf-v5-c-masthead,
+.pf-v5-c-page__header {
+  background: linear-gradient(135deg, var(--chrome-bg) 0%, oklch(20% 0.03 280) 100%);
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid var(--chrome-border);
+}
+
+.pf-v5-c-masthead,
+.pf-v5-c-masthead .pf-v5-c-button,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle,
+.pf-v5-c-masthead__toggle .pf-v5-c-button {
+  color: var(--chrome-text);
+}
+
+.pf-v5-c-masthead .pf-v5-c-button:hover,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover {
+  background-color: var(--chrome-bg-hover);
+  color: white;
+}
+
+img.keycloak__pageheader_brand {
+  height: 40px;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.3));
+  transition: transform 0.2s ease;
+}
+
+img.keycloak__pageheader_brand:hover {
+  transform: scale(1.05);
+}
+
+/* Dark chrome: sidebar */
+.pf-v5-c-page__sidebar {
+  background: var(--chrome-bg);
+  border-right: 1px solid var(--chrome-border);
+}
+
+.pf-v5-c-nav {
+  background: transparent;
+}
+
+.pf-v5-c-nav__section-title {
+  color: var(--chrome-text-muted);
+}
+
+.pf-v5-c-nav__link {
+  color: var(--chrome-text-muted);
+  border-radius: var(--pf-v5-global--BorderRadius--sm);
+  margin: 0.25rem 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.pf-v5-c-nav__link:hover {
+  background-color: var(--chrome-bg-hover);
+  color: white;
+  transform: translateX(4px);
+}
+
+.pf-v5-c-nav__link.pf-m-current {
+  background: linear-gradient(135deg, var(--brand-color) 0%, var(--brand-color-dark) 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Breadcrumb */
+.pf-v5-c-breadcrumb__link {
+  color: var(--neutral-600);
+  transition: color 0.15s ease;
+}
+
+.pf-v5-c-breadcrumb__link:hover {
+  color: var(--brand-color);
+}
+
+/* Badges and labels */
+.pf-v5-c-label,
+.pf-v5-c-badge {
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  box-shadow: var(--shadow-xs);
+}
+
+/* Tabs */
+.pf-v5-c-tabs__link {
+  border-radius: var(--pf-v5-global--BorderRadius--sm) var(--pf-v5-global--BorderRadius--sm) 0 0;
+  transition: all 0.15s ease;
+}
+
+.pf-v5-c-tabs__link:hover {
+  background-color: var(--neutral-100);
+}
+
+.pf-v5-c-tabs__link.pf-m-current {
+  background-color: white;
+  border-bottom-color: var(--brand-color);
+  border-bottom-width: 3px;
+  font-weight: 600;
+}
+
+/* Progress bars */
+.pf-v5-c-progress__bar {
+  border-radius: 9999px;
+}
+
+.pf-v5-c-progress__indicator {
+  background: linear-gradient(90deg, var(--brand-color) 0%, var(--brand-color-dark) 100%);
+  border-radius: 9999px;
+}
+
+.keycloak__form {
+  max-width: 1024px;
+  padding-bottom: var(--pf-v5-global--spacer--4xl);
+}
+
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+}
+
+.keycloak__form_actions {
+  position: fixed;
+  bottom: 0px;
+  background: linear-gradient(to top, var(--neutral-50), rgba(255, 255, 255, 0.98));
+  backdrop-filter: blur(8px);
+  padding-top: var(--pf-v5-global--spacer--md);
+  padding-bottom: var(--pf-v5-global--spacer--sm);
+  padding-left: var(--pf-v5-global--spacer--md);
+  width: 100%;
+  border-top: 1px solid var(--pf-v5-global--BorderColor--100);
+  margin-left: calc(-1 * var(--pf-v5-global--spacer--lg));
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.keycloak__section_intro__help {
+  padding: var(--pf-v5-global--spacer--md) 0 var(--pf-v5-global--spacer--lg);
+  color: var(--brand-color);
+  width: fit-content;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.keycloak__section_intro__help:hover {
+  color: var(--brand-color-hover);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pf-v5-c-page__main-section {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Loading states */
+.pf-v5-c-spinner {
+  color: var(--brand-color);
 }
 
 /* Scrollbar styling */

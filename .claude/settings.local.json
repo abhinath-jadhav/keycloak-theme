@@ -2,7 +2,42 @@
   "permissions": {
     "allow": [
       "PowerShell(Get-Command *)",
-      "WebFetch(domain:docs.keycloakify.dev)"
+      "WebFetch(domain:docs.keycloakify.dev)",
+      "Bash(npm run *)",
+      "Bash(docker --version)",
+      "Bash(npm --version)",
+      "Read(//usr/lib/**)",
+      "Bash(sudo -n true)",
+      "Bash(sg docker *)",
+      "Bash(sudo -n docker ps 2>&1)",
+      "Bash(docker run *)",
+      "Bash(npm install *)",
+      "Bash(git check-ignore *)",
+      "Bash(sudo -n apt install -y maven)",
+      "Bash(mvn -version)",
+      "Bash(docker cp *)",
+      "Bash(docker exec *)",
+      "Bash(docker restart *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8080/admin/master/console/)",
+      "Read(//home/abhinath/Pictures/home/abhinath/**)",
+      "Read(//home/abhinath/Pictures/**)",
+      "Bash(curl -s http://localhost:8080/admin/master/console/)",
+      "Bash(unzip -l dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar)",
+      "Bash(unzip -p dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar \"theme/keycloak-theme-auctionbase/admin/theme.properties\")",
+      "Bash(unzip -p dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar \"theme/keycloak-theme-auctionbase/admin/resources/dist/assets/*.js\")",
+      "Bash(unzip -p dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar \"theme/keycloak-theme-auctionbase/admin/resources/dist/assets/KcAdminUi-Cr244Mz4.css\")",
+      "Bash(cd *)",
+      "Bash(xargs -I{} sh -c 'echo \"=== {} ===\"; cat {}')",
+      "Bash(npx --yes playwright --version)",
+      "Bash(npm init *)",
+      "Bash(node check.js)",
+      "Bash(node check2.js)",
+      "Bash(node check3.js)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8080/admin/master/console/)",
+      "Bash(node check4.js)",
+      "Bash(node check5.js)",
+      "Bash(node check6.js)",
+      "Bash(node check7.js)"
     ]
   }
 }
