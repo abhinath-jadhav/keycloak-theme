@@ -317,6 +317,7 @@ export default function ClientScopesSection() {
               cellRenderer: (row) => (
                 <TypeSelector {...row} refresh={refresh} />
               ),
+              transforms: [cellWidth(15)],
             },
             {
               name: "protocol",

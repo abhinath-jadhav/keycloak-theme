@@ -9,7 +9,7 @@
 
 // @ts-nocheck
 
-import logoSvgUrl from "./assets/logo.svg";
+import logoSvgUrl from "./assets/logo.png";
 import {
   KeycloakMasthead,
   useEnvironment,
@@ -20,6 +20,7 @@ import { HelpIcon } from "../shared/@patternfly/react-icons";
 import { useTranslation } from "react-i18next";
 import { Link, useHref } from "react-router-dom";
 import { PageHeaderClearCachesModal } from "./PageHeaderClearCachesModal";
+import { ColorSchemeToggle } from "./components/ColorSchemeToggle";
 import { HelpHeader } from "./components/help-enabler/HelpHeader";
 import { useAccess } from "./context/access/Access";
 import { useRealm } from "./context/realm-context/RealmContext";
@@ -139,6 +140,9 @@ export const Header = () => {
       dropdownItems={userDropdownItems(isMasterRealm, isManager)}
       kebabDropdownItems={kebabDropdownItems(isMasterRealm, isManager)}
       toolbarItems={[
+        <ToolbarItem key="color-scheme" align={{ default: "alignRight" }}>
+          <ColorSchemeToggle />
+        </ToolbarItem>,
         <ToolbarItem
           key="help"
           align={{ default: "alignRight" }}

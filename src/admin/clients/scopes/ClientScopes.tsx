@@ -22,6 +22,7 @@ import {
   ToolbarItem,
 } from "../../../shared/@patternfly/react-core";
 import { EllipsisVIcon } from "../../../shared/@patternfly/react-icons";
+import { cellWidth } from "../../../shared/@patternfly/react-table";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -401,6 +402,7 @@ export const ClientScopes = ({
             cellRenderer: (row) => (
               <TypeSelector clientId={clientId} refresh={refresh} {...row} />
             ),
+            transforms: [cellWidth(15)],
           },
           { name: "description", cellFormatters: [translationFormatter(t)] },
         ]}

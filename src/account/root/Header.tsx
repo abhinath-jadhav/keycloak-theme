@@ -9,7 +9,7 @@
 
 // @ts-nocheck
 
-import logoSvgUrl from "../assets/logo.svg";
+import logoSvgUrl from "../assets/logo.png";
 import {
   KeycloakMasthead,
   label,
@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 import { useHref } from "react-router-dom";
 
 import { AccountEnvironment } from "..";
+import { ColorSchemeToggle } from "../components/ColorSchemeToggle";
 import { joinPath } from "../utils/joinPath";
 
 import style from "./header.module.css";
@@ -56,7 +57,7 @@ export const Header = () => {
 
   // User can indicate that he wants an internal URL by starting it with "/"
   const indexHref = logoUrl.startsWith("/") ? internalLogoHref : logoUrl;
-
+  console.log(logoSvgUrl)
   return (
     <KeycloakMasthead
       data-testid="page-header"
@@ -68,7 +69,10 @@ export const Header = () => {
         alt: t("logo"),
         className: style.brand,
       }}
-      toolbarItems={[<ReferrerLink key="link" />]}
+      toolbarItems={[
+        <ColorSchemeToggle key="color-scheme" />,
+        <ReferrerLink key="link" />,
+      ]}
     />
   );
 };

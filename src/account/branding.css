@@ -1,40 +1,48 @@
 /*
- * Modern Brand Theming for the Account Console
- * Enhanced with better colors, spacing, shadows, and contemporary design
+ * Supabase-inspired dark-first theming for the Account Console.
+ * Dark mode is the default experience (near-black surfaces, bright green
+ * accent); light mode is a fully-styled secondary option reachable via the
+ * color-scheme toggle, including a light masthead + sidebar ("chrome").
  */
 
 @import "@fontsource-variable/geist";
 
 :root {
-  /* Modern color palette - Vivid indigo/violet, deliberately distinct from Keycloak's stock blue */
-  --brand-color: oklch(58% 0.22 292);
-  --brand-color-hover: oklch(50% 0.20 292);
-  --brand-color-light: oklch(90% 0.05 292);
-  --brand-color-dark: oklch(38% 0.18 292);
+  /* Brand accent - Supabase green. A single mid-lightness value is used in
+     both light and dark mode (it has enough contrast against white AND
+     near-black); only --brand-color-light (used for subtle tints / on-dark
+     text contrast) differs per mode. */
+  --brand-color: #24b47e;
+  --brand-color-hover: #1e9c6b;
+  --brand-color-light: #d2f4e4;
+  --brand-color-dark: #12633f;
 
-  /* Dark chrome for masthead + sidebar (structural brand identity) */
-  --chrome-bg: oklch(16% 0.025 280);
-  --chrome-bg-hover: oklch(23% 0.035 280);
-  --chrome-border: oklch(27% 0.03 280);
-  --chrome-text: oklch(88% 0.01 280);
-  --chrome-text-muted: oklch(62% 0.02 280);
+  /* Chrome (masthead + sidebar): light-mode values here, overridden for
+     dark mode inside .pf-v5-theme-dark below. */
+  --chrome-bg: #ffffff;
+  --chrome-bg-end: #f7f7f7;
+  --chrome-bg-hover: #f0f0f0;
+  --chrome-border: #e6e6e6;
+  --chrome-text: #262626;
+  --chrome-text-muted: #737373;
+  --chrome-text-hover: #1a1a1a;
 
   /* Success, warning, danger colors */
   --success-color: oklch(65% 0.18 150);
   --warning-color: oklch(70% 0.15 80);
   --danger-color: oklch(60% 0.18 25);
-  
-  /* Neutral grays for modern UI */
-  --neutral-50: oklch(98% 0.002 260);
-  --neutral-100: oklch(96% 0.004 260);
-  --neutral-200: oklch(92% 0.006 260);
-  --neutral-300: oklch(88% 0.008 260);
-  --neutral-400: oklch(74% 0.01 260);
-  --neutral-500: oklch(60% 0.012 260);
-  --neutral-600: oklch(48% 0.014 260);
-  --neutral-700: oklch(38% 0.016 260);
-  --neutral-800: oklch(28% 0.018 260);
-  --neutral-900: oklch(20% 0.02 260);
+
+  /* Neutral scale driving page/card/border surfaces */
+  --neutral-50: #ffffff;
+  --neutral-100: #f7f7f7;
+  --neutral-200: #e6e6e6;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #3a3a3a;
+  --neutral-800: #262626;
+  --neutral-900: #1a1a1a;
 
   /* Primary brand colors */
   --pf-v5-global--primary-color--100: var(--brand-color);
@@ -42,9 +50,12 @@
   --pf-v5-global--primary-color--light-100: var(--brand-color-light);
   --pf-v5-global--primary-color--dark-100: var(--brand-color-dark);
 
-  /* Active states */
+  /* Active states - full scale overridden so no PatternFly stock blue (#73bcf7 etc.)
+     leaks through on Nav/Card/Label/Slider/Table/Tile selected states */
   --pf-v5-global--active-color--100: var(--brand-color);
+  --pf-v5-global--active-color--200: var(--brand-color-light);
   --pf-v5-global--active-color--300: var(--brand-color-hover);
+  --pf-v5-global--active-color--400: var(--brand-color);
 
   /* Links */
   --pf-v5-global--link--Color: var(--brand-color);
@@ -96,45 +107,85 @@
   /* Page background */
   --pf-v5-global--BackgroundColor--100: var(--neutral-50);
   --pf-v5-global--BackgroundColor--200: var(--neutral-100);
-  
+
   /* Border colors */
   --pf-v5-global--BorderColor--100: var(--neutral-200);
   --pf-v5-global--BorderColor--200: var(--neutral-300);
 }
 
 .pf-v5-theme-dark {
-  --brand-color-light: oklch(78% 0.10 292);
+  --brand-color-light: #7ee8b8;
 
-  --neutral-50: oklch(20% 0.025 280);
-  --neutral-100: oklch(24% 0.022 280);
-  --neutral-200: oklch(28% 0.02 280);
-  --neutral-300: oklch(34% 0.018 280);
-  --neutral-400: oklch(42% 0.015 280);
-  --neutral-500: oklch(52% 0.012 280);
-  --neutral-600: oklch(65% 0.01 280);
-  --neutral-700: oklch(75% 0.008 280);
-  --neutral-800: oklch(85% 0.005 280);
-  --neutral-900: oklch(92% 0.002 280);
+  --chrome-bg: #171717;
+  --chrome-bg-end: #131313;
+  --chrome-bg-hover: #232323;
+  --chrome-border: #2a2a2a;
+  --chrome-text: #e5e5e5;
+  --chrome-text-muted: #8a8a8a;
+  --chrome-text-hover: #ffffff;
+
+  --neutral-50: #171717;
+  --neutral-100: #1c1c1c;
+  --neutral-200: #2e2e2e;
+  --neutral-300: #3a3a3a;
+  --neutral-400: #525252;
+  --neutral-500: #737373;
+  --neutral-600: #a0a0a0;
+  --neutral-700: #c7c7c7;
+  --neutral-800: #e0e0e0;
+  --neutral-900: #f5f5f5;
 
   --pf-v5-global--primary-color--100: var(--brand-color-light);
   --pf-v5-global--primary-color--200: var(--brand-color);
   --pf-v5-global--active-color--100: var(--brand-color-light);
+  --pf-v5-global--active-color--200: var(--brand-color);
+  --pf-v5-global--active-color--300: var(--brand-color-light);
+  --pf-v5-global--active-color--400: var(--brand-color-light);
   --pf-v5-global--link--Color: var(--brand-color-light);
   --pf-v5-global--link--Color--hover: var(--brand-color);
-  
+
   --pf-v5-global--BackgroundColor--100: var(--neutral-50);
+  --pf-v5-global--BackgroundColor--150: var(--neutral-100);
   --pf-v5-global--BackgroundColor--200: var(--neutral-100);
+  --pf-v5-global--BackgroundColor--300: var(--neutral-200);
+  --pf-v5-global--BackgroundColor--400: var(--neutral-300);
+  --pf-v5-global--BackgroundColor--light-100: var(--neutral-50);
+  --pf-v5-global--BackgroundColor--dark-100: var(--neutral-100);
+  --pf-v5-global--BackgroundColor--dark-200: var(--neutral-50);
+
   --pf-v5-global--BorderColor--100: var(--neutral-200);
   --pf-v5-global--BorderColor--200: var(--neutral-300);
-  
+  --pf-v5-global--BorderColor--300: var(--neutral-400);
+  --pf-v5-global--BorderColor--400: var(--neutral-500);
+
+  /* Body/heading text: PatternFly's stock light-theme values (#151515 etc.)
+     don't flip on their own, they need an explicit dark-mode override. */
+  --pf-v5-global--Color--100: var(--neutral-800);
+  --pf-v5-global--Color--200: var(--neutral-600);
+  --pf-v5-global--Color--300: var(--neutral-500);
+  --pf-v5-global--Color--400: var(--neutral-600);
+  --pf-v5-global--Color--light-100: var(--neutral-800);
+  --pf-v5-global--Color--dark-100: var(--neutral-800);
+
+  --pf-v5-global--disabled-color--100: var(--neutral-500);
+  --pf-v5-global--disabled-color--200: var(--neutral-300);
+  --pf-v5-global--disabled-color--300: var(--neutral-200);
+
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
 }
 
+.pf-v5-theme-dark body,
+.pf-v5-theme-dark .pf-v5-c-page {
+  background-color: var(--neutral-50);
+  color: var(--pf-v5-global--Color--100);
+}
+
 /* Modern component styling */
 .pf-v5-c-button,
+.pf-v5-c-menu-toggle,
 .pf-v5-c-form-control,
 .pf-v5-c-card,
 .pf-v5-c-menu,
@@ -145,28 +196,38 @@
 }
 
 /* Enhanced button styles */
-.pf-v5-c-button {
+.pf-v5-c-button,
+.pf-v5-c-menu-toggle {
   font-weight: 500;
   letter-spacing: -0.01em;
   transition: all 0.15s ease;
 }
 
-.pf-v5-c-button:hover:not(:disabled) {
+.pf-v5-c-button:hover:not(:disabled),
+.pf-v5-c-menu-toggle:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
 
-.pf-v5-c-button:active:not(:disabled) {
+.pf-v5-c-button:active:not(:disabled),
+.pf-v5-c-menu-toggle:active:not(:disabled) {
   transform: translateY(0);
 }
 
-.pf-v5-c-button--m-primary {
+/* NOTE: PatternFly renders modifiers as separate space-joined classes
+   (e.g. "pf-v5-c-button pf-m-primary"), not a single hyphenated class -
+   the previous `.pf-v5-c-button--m-primary` selector never matched, so
+   primary buttons fell through to PatternFly's stock styling. */
+.pf-v5-c-button.pf-m-primary,
+.pf-v5-c-menu-toggle.pf-m-primary {
   background: linear-gradient(135deg, var(--brand-color) 0%, var(--brand-color-dark) 100%);
   border: none;
+  color: white;
   box-shadow: var(--shadow-sm);
 }
 
-.pf-v5-c-button--m-primary:hover:not(:disabled) {
+.pf-v5-c-button.pf-m-primary:hover:not(:disabled),
+.pf-v5-c-menu-toggle.pf-m-primary:hover:not(:disabled) {
   background: linear-gradient(135deg, var(--brand-color-hover) 0%, var(--brand-color-dark) 100%);
   box-shadow: var(--shadow-md);
 }
@@ -176,6 +237,7 @@
   border-radius: var(--pf-v5-global--BorderRadius--md);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--pf-v5-global--BorderColor--100);
+  background-color: var(--pf-v5-global--BackgroundColor--200);
   transition: all 0.2s ease;
   overflow: hidden;
 }
@@ -204,7 +266,7 @@
 }
 
 .pf-v5-c-table tbody tr:hover {
-  background-color: var(--neutral-50);
+  background-color: var(--neutral-100);
 }
 
 /* Enhanced form controls */
@@ -230,6 +292,7 @@
   border-radius: var(--pf-v5-global--BorderRadius--md);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--pf-v5-global--BorderColor--100);
+  background-color: var(--pf-v5-global--BackgroundColor--200);
 }
 
 .pf-v5-c-dropdown__menu-item:hover,
@@ -243,6 +306,7 @@
   border-radius: var(--pf-v5-global--BorderRadius--lg);
   box-shadow: var(--shadow-xl);
   border: none;
+  background-color: var(--pf-v5-global--BackgroundColor--200);
 }
 
 .pf-v5-c-modal-box__header {
@@ -262,45 +326,89 @@
   box-shadow: var(--shadow-sm);
 }
 
-.pf-v5-c-alert--m-success {
+/* NOTE: PatternFly renders modifiers as separate space-joined classes
+   (e.g. "pf-v5-c-alert pf-m-success"), not a single hyphenated class -
+   same pitfall as the button rule above. */
+.pf-v5-c-alert.pf-m-success {
   background-color: oklch(95% 0.04 150);
   border-left-color: var(--success-color);
 }
 
-.pf-v5-c-alert--m-warning {
+.pf-v5-c-alert.pf-m-warning {
   background-color: oklch(95% 0.04 80);
   border-left-color: var(--warning-color);
 }
 
-.pf-v5-c-alert--m-danger {
+.pf-v5-c-alert.pf-m-danger {
   background-color: oklch(95% 0.04 25);
   border-left-color: var(--danger-color);
 }
 
-.pf-v5-c-alert--m-info {
+.pf-v5-c-alert.pf-m-info {
   background-color: oklch(95% 0.04 260);
   border-left-color: var(--brand-color);
 }
 
-/* Dark chrome: masthead (top header) - real class is .pf-v5-c-masthead, not .pf-v5-c-page__header */
+.pf-v5-theme-dark .pf-v5-c-alert.pf-m-success {
+  background-color: oklch(28% 0.05 150);
+}
+
+.pf-v5-theme-dark .pf-v5-c-alert.pf-m-warning {
+  background-color: oklch(28% 0.05 80);
+}
+
+.pf-v5-theme-dark .pf-v5-c-alert.pf-m-danger {
+  background-color: oklch(28% 0.05 25);
+}
+
+.pf-v5-theme-dark .pf-v5-c-alert.pf-m-info {
+  background-color: oklch(28% 0.05 260);
+}
+
+/* Masthead (top header) - real class is .pf-v5-c-masthead, not .pf-v5-c-page__header.
+   Theme-aware: light in light mode, dark in dark mode (see --chrome-* tokens above). */
 .pf-v5-c-masthead,
 .pf-v5-c-page__header {
-  background: linear-gradient(135deg, var(--chrome-bg) 0%, oklch(20% 0.03 280) 100%);
+  /* PatternFly's own --pf-v5-c-masthead--BackgroundColor defaults to a
+     hardcoded dark constant regardless of theme, and nested elements like
+     .pf-v5-c-toolbar read that variable directly (not the `background`
+     shorthand below) - override it so they follow the theme too. */
+  --pf-v5-c-masthead--BackgroundColor: var(--chrome-bg);
+  background: linear-gradient(135deg, var(--chrome-bg) 0%, var(--chrome-bg-end) 100%);
   box-shadow: var(--shadow-md);
   border-bottom: 1px solid var(--chrome-border);
 }
 
+/* PatternFly bakes an *unconditional* "masthead = dark surface" assumption
+   into its own base CSS: a rule matching .pf-v5-c-masthead (and its plain
+   buttons) remaps --pf-v5-global--Color--100/200 etc. to its light-on-dark
+   token family regardless of theme, which then wins the plain-button color
+   cascade over a same-specificity override. !important is used deliberately
+   here (nowhere else in this file) because there's no other deterministic
+   way to override that baked-in default from our own theme tokens. */
 .pf-v5-c-masthead,
 .pf-v5-c-masthead .pf-v5-c-button,
+.pf-v5-c-masthead .pf-v5-c-button.pf-m-plain,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle,
 .pf-v5-c-masthead__toggle .pf-v5-c-button {
-  color: var(--chrome-text);
+  color: var(--chrome-text) !important;
 }
 
 .pf-v5-c-masthead .pf-v5-c-button:hover,
+.pf-v5-c-masthead .pf-v5-c-button.pf-m-plain:hover,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle:hover {
   background-color: var(--chrome-bg-hover);
-  color: white;
+  color: var(--chrome-text-hover) !important;
+}
+
+/* The toolbar nested inside the masthead (referrer link / avatar cluster)
+   reads its own --pf-v5-c-toolbar--BackgroundColor, which PatternFly seeds
+   from a hardcoded dark constant. Set the real background-color directly
+   (higher specificity than PatternFly's own .pf-v5-c-toolbar rule) so it
+   can't lose to a custom-property cascade race across separate stylesheet
+   chunks. */
+.pf-v5-c-masthead .pf-v5-c-toolbar {
+  background-color: var(--chrome-bg);
 }
 
 img.keycloak__pageheader_brand {
@@ -313,7 +421,7 @@ img.keycloak__pageheader_brand:hover {
   transform: scale(1.05);
 }
 
-/* Dark chrome: sidebar */
+/* Sidebar (theme-aware, see --chrome-* tokens above) */
 .pf-v5-c-page__sidebar {
   background: var(--chrome-bg);
   border-right: 1px solid var(--chrome-border);
@@ -336,7 +444,7 @@ img.keycloak__pageheader_brand:hover {
 
 .pf-v5-c-nav__link:hover {
   background-color: var(--chrome-bg-hover);
-  color: white;
+  color: var(--chrome-text-hover);
   transform: translateX(4px);
 }
 
@@ -345,6 +453,51 @@ img.keycloak__pageheader_brand:hover {
   color: white;
   font-weight: 600;
   box-shadow: var(--shadow-sm);
+}
+
+/* Disabled buttons/menu-toggles: PatternFly's own --disabled-color--300
+   token is meant to render as a near-invisible hint (e.g. #f0f0f0 text in
+   light mode, ~identical to its own #444548-ish disabled background in dark
+   mode) - pick a value that's still clearly muted but stays legible against
+   either background instead. !important because the underlying token is set
+   on a very specific PatternFly selector we can't outrank any other way
+   (same class of issue as the masthead override above). */
+.pf-v5-c-button:disabled,
+.pf-v5-c-button.pf-m-disabled,
+.pf-v5-c-menu-toggle:disabled,
+.pf-v5-c-menu-toggle.pf-m-disabled {
+  color: var(--neutral-600) !important;
+}
+
+/* Add breathing room between adjoining input-group items (filter dropdown +
+   search field + submit button) - by default PatternFly renders them
+   perfectly flush as one joined pill, but each item already has its own
+   independent rounded background/border here, so flush reads as broken.
+   This rule applies at every nesting level (the filter+search+button row is
+   itself a group of groups), so one rule covers all the gaps. */
+.pf-v5-c-input-group {
+  gap: 0.5rem;
+}
+
+/* The search field itself (.pf-v5-c-text-input-group) ships with a solid
+   background but no border-radius, unlike every other control here. */
+.pf-v5-c-text-input-group {
+  border-radius: var(--pf-v5-global--BorderRadius--sm);
+  overflow: hidden;
+}
+
+/* PatternFly's own hover state for .pf-v5-c-text-input-group turns its
+   bottom-edge underline pseudo-element to --primary-color--100 (our brand
+   green) - that underline treatment made sense on the unstyled/borderless
+   default input, but now that the field has its own full rounded border
+   above, a green sliver at the bottom on hover reads as a stray/broken
+   border. Keep it the same neutral gray as the resting state instead.
+   !important: same custom-property selector as PatternFly's own rule, so
+   there's no other way to guarantee this wins the cascade. */
+.pf-v5-c-text-input-group:hover {
+  --pf-v5-c-text-input-group--hover__text--after--BorderBottomColor: var(
+    --pf-v5-global--BorderColor--200
+  ) !important;
 }
 
 /* Breadcrumb */
@@ -377,11 +530,17 @@ img.keycloak__pageheader_brand:hover {
   background-color: var(--neutral-100);
 }
 
-.pf-v5-c-tabs__link.pf-m-current {
-  background-color: white;
+/* NOTE: PatternFly puts pf-m-current on the <li class="pf-v5-c-tabs__item">
+   ancestor, not on the .pf-v5-c-tabs__link itself - the previous selector
+   (`.pf-v5-c-tabs__link.pf-m-current`, hardcoded to a white background)
+   never matched, so the active tab had no visual distinction and would
+   have rendered a light-mode-only white pill in dark mode anyway. */
+.pf-v5-c-tabs__item.pf-m-current .pf-v5-c-tabs__link {
+  background-color: var(--pf-v5-global--BackgroundColor--100);
   border-bottom-color: var(--brand-color);
   border-bottom-width: 3px;
   font-weight: 600;
+  color: var(--brand-color);
 }
 
 /* Progress bars */
@@ -416,7 +575,7 @@ input[type="checkbox"]:checked {
 .keycloak__form_actions {
   position: fixed;
   bottom: 0px;
-  background: linear-gradient(to top, var(--neutral-50), rgba(255, 255, 255, 0.98));
+  background: linear-gradient(to top, var(--neutral-50), color-mix(in srgb, var(--neutral-50) 98%, transparent));
   backdrop-filter: blur(8px);
   padding-top: var(--pf-v5-global--spacer--md);
   padding-bottom: var(--pf-v5-global--spacer--sm);

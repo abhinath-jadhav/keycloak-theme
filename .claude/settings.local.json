@@ -37,7 +37,21 @@
       "Bash(node check4.js)",
       "Bash(node check5.js)",
       "Bash(node check6.js)",
-      "Bash(node check7.js)"
+      "Bash(node check7.js)",
+      "Bash(docker volume *)",
+      "Bash(docker network *)",
+      "Bash(sudo ss -tlnp)",
+      "Bash(dpkg -l)",
+      "Bash(systemctl status *)",
+      "Bash(sudo -u postgres psql -c \"\\\\du\")",
+      "Bash(sudo -u postgres psql -c \"\\\\l\")",
+      "Bash(sudo -n -u postgres psql -c \"\\\\du\" 2>&1)",
+      "Bash(psql -U ubuntu -d postgres -c \"\\\\du\")",
+      "Bash(psql -h 127.0.0.1 -U postgres -d postgres -c \"select 1\")",
+      "Bash(timeout 90 docker logs -f keycloak)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8080/)",
+      "Bash(npx --version)",
+      "Bash(timeout 20 google-chrome --headless --disable-gpu --no-sandbox --window-size=1600,1000 --screenshot=/tmp/claude-1000/-home-ubuntu-workspace-keycloak-theme/14ed8236-57a8-4552-b6e3-4db3d7787fb3/scratchpad/clients_noauth.png \"http://localhost:8080/admin/master/console/#/master/clients\")"
     ]
   }
 }

@@ -1,19 +1,22 @@
 /**
  * This file has been claimed for ownership from @keycloakify/keycloak-admin-ui version 260700.0.2.
  * To relinquish ownership and restore this file to its original content, run the following command:
- * 
+ *
  * $ npx keycloakify own --path "admin/colorScheme.ts" --revert
  */
 
 /* IMPORTANT NOTE:
  * If you modify how the light/dark mode is implemented
- * you must also update public/admin/early-color-scheme.js
+ * you must also update public/keycloak-theme/admin/early-color-scheme.js
  * This scrip is ran before this to avoid white flashes
  */
 
 import { getKcContext } from "./KcContext";
 
 const DARK_THEME_CLASS = "pf-v5-theme-dark";
+const STORAGE_KEY = "kc-admin-color-scheme";
+
+export type ColorScheme = "light" | "dark";
 
 function setIsDarkModeEnabled(isDarkModeEnabled: boolean) {
     {
@@ -46,6 +49,49 @@ function setIsDarkModeEnabled(isDarkModeEnabled: boolean) {
     }
 }
 
+function getStoredColorScheme(): ColorScheme | undefined {
+    let stored: string | null;
+
+    try {
+        stored = localStorage.getItem(STORAGE_KEY);
+    } catch {
+        return undefined;
+    }
+
+    return stored === "light" || stored === "dark" ? stored : undefined;
+}
+
+/**
+ * Returns whether dark mode is currently applied to the document.
+ */
+export function getCurrentColorScheme(): ColorScheme {
+    return document.documentElement.classList.contains(DARK_THEME_CLASS) ? "dark" : "light";
+}
+
+/**
+ * Whether the visitor is allowed to switch color scheme themselves.
+ * The realm "Dark Mode" setting, when explicitly disabled, is an admin
+ * policy that overrides personal preference.
+ */
+export function isColorSchemeUserConfigurable(): boolean {
+    const { kcContext } = getKcContext();
+    return kcContext.darkMode !== false;
+}
+
+/**
+ * Manually sets the color scheme and persists the choice so it survives reloads.
+ */
+export function setColorScheme(colorScheme: ColorScheme) {
+    try {
+        localStorage.setItem(STORAGE_KEY, colorScheme);
+    } catch {
+        // localStorage unavailable (e.g. private browsing with storage disabled):
+        // the choice just won't survive a reload.
+    }
+
+    setIsDarkModeEnabled(colorScheme === "dark");
+}
+
 export function startColorSchemeManagement() {
     const { kcContext } = getKcContext();
 
@@ -58,11 +104,8 @@ export function startColorSchemeManagement() {
         return;
     }
 
-    const mediaQuery_isDarkThePreferredColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const storedColorScheme = getStoredColorScheme();
 
-    setIsDarkModeEnabled(mediaQuery_isDarkThePreferredColorScheme.matches);
-
-    mediaQuery_isDarkThePreferredColorScheme.addEventListener("change", event =>
-        setIsDarkModeEnabled(event.matches)
-    );
+    // No stored preference yet: default to dark (not the OS preference).
+    setIsDarkModeEnabled(storedColorScheme === undefined ? true : storedColorScheme === "dark");
 }
